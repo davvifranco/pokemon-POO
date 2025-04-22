@@ -4,9 +4,8 @@ public class PokemonFogo extends Pokemon {
     public String superEfetivo;
     public String fraqueza;
 
-    // Construtor
     public PokemonFogo(String nome, int level, String habilidade, String superEfetivo, String fraqueza, String imagemPath) {
-        super(nome, level, habilidade, imagemPath); // Chama o construtor da classe Pokemon
+        super(nome, level, habilidade, imagemPath);
         this.superEfetivo = superEfetivo;
         this.fraqueza = fraqueza;
     }
