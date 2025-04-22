@@ -8,7 +8,6 @@ public abstract class Pokemon {
     private String habilidade;
     private String imagem;
 
-    // Construtor para inicializar nome, level e habilidade
     public Pokemon(String nome, int level, String habilidade, String imagem) {
         this.nome = nome;
         this.level = level;
@@ -16,7 +15,6 @@ public abstract class Pokemon {
         this.imagem = imagem;
     }
 
-    // Métodos getters e setters
     public String getNome() {
         return nome;
     }
@@ -49,21 +47,18 @@ public abstract class Pokemon {
         this.imagem = imagem;
     }
 
-    // Método abstrato que deve ser implementado pelas subclasses
     public abstract void ataque();
 
-    // Adicionando equals para comparar Pokémon com base no nome (ou outros atributos)
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Pokemon pokemon = (Pokemon) obj;
-        return Objects.equals(nome, pokemon.nome); // Compara o nome (ou outros atributos)
+        return Objects.equals(nome, pokemon.nome); 
     }
 
-    // Adicionando hashCode para garantir que seja consistente com equals
     @Override
     public int hashCode() {
-        return Objects.hash(nome); // Usa o nome para o código hash
+        return Objects.hash(nome);
     }
 }
