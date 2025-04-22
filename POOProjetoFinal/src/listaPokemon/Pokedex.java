@@ -12,7 +12,6 @@ public class Pokedex {
         this.pokedex = new ArrayList<>();
     }
 
-    // Método para adicionar Pokémon à Pokédex
     public void adicionarPokemon(Pokemon pokemon) {
         if (!pokedex.contains(pokemon)) {
             pokedex.add(pokemon);
@@ -20,7 +19,6 @@ public class Pokedex {
         }
     }
 
-    // Método para acessar a Pokédex
     public List<Pokemon> getPokedex() {
         return pokedex;
     }
