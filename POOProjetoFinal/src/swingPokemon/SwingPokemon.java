@@ -100,7 +100,6 @@ public class SwingPokemon {
         panel2.removeAll(); 
         panel2.setLayout(null); 
 
-        // Adiciona o fundo
         JLabel fundoLabel = new JLabel(new ImageIcon("C:\\Users\\davvi\\Downloads\\sr2f745bc58f2aws3.gif"));
         fundoLabel.setBounds(0, 0, 1080, 730);
         panel2.add(fundoLabel);
@@ -122,18 +121,15 @@ public class SwingPokemon {
             y += 120;
         }
 
-        // Adiciona o botão "Voltar"
         JButton botaoVoltar = new JButton();
-        botaoVoltar.setBounds(28, 540, 223, 114);  // Posição do botão "Voltar"
+        botaoVoltar.setBounds(28, 540, 223, 114);  
         configurarBotao(botaoVoltar, "VOLTAR");
         botaoVoltar.addActionListener(e -> cardLayout.show(cardPanel, "panel1"));
 
         panel2.add(botaoVoltar);
 
-        // Garantir que o fundo fique no fundo
-        panel2.setComponentZOrder(fundoLabel, panel2.getComponentCount() - 1);  // Coloca o fundo por último
+        panel2.setComponentZOrder(fundoLabel, panel2.getComponentCount() - 1); 
 
-        // Recalcular a organização dos componentes
         panel2.revalidate();
         panel2.repaint();
     }
@@ -154,12 +150,10 @@ public class SwingPokemon {
     private static void procurarPokemon(JFrame frame, JPanel panel3) {
         ListaPokemonsSelvagens lista = new ListaPokemonsSelvagens();
 
-        // Verifica se a lista de pokémons selvagens está vazia
         if (lista.getPokemons().isEmpty()) {
-            // Atualiza o fundo e mostra a mensagem de "Nenhum Pokémon nas redondezas"
             JLabel fundoLabel = new JLabel(new ImageIcon("C:\\Caminho\\Para\\Sua\\Imagem\\de\\fundo.png"));
             fundoLabel.setBounds(0, 0, 1080, 730);
-            panel3.removeAll();  // Remove todos os componentes do painel
+            panel3.removeAll(); 
             panel3.add(fundoLabel);
             JOptionPane.showMessageDialog(frame, "Nenhum Pokémon nas redondezas!");
             panel3.revalidate();
@@ -167,7 +161,6 @@ public class SwingPokemon {
             return;
         }
 
-        // Filtra os Pokémons que ainda não foram capturados
         List<Pokemon> pokemonsNaoCapturados = new ArrayList<>();
         for (Pokemon p : lista.getPokemons()) {
             if (!pokedex.contains(p)) {
@@ -175,24 +168,20 @@ public class SwingPokemon {
             }
         }
 
-        // Verifica se todos os Pokémons já foram capturados
         if (pokemonsNaoCapturados.isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Você já capturou todos os Pokémon!");
             return;
         }
 
-        // Seleciona um Pokémon aleatório da lista de selvagens
         int indiceAleatorio = (int) (Math.random() * pokemonsNaoCapturados.size());
         Pokemon pokemon = pokemonsNaoCapturados.get(indiceAleatorio);
 
-        // Remove o Pokémon anterior se houver
         for (Component comp : panel3.getComponents()) {
             if (comp instanceof JLabel && comp != panel3.getComponent(panel3.getComponentCount() - 1)) {
-                panel3.remove(comp);  // Remove todos os componentes, exceto o fundo
+                panel3.remove(comp);  
             }
         }
 
-        // Exibe a imagem do novo Pokémon
         String caminhoImagem = pokemon.getImagem();
         ImageIcon imageIcon = new ImageIcon(caminhoImagem);
         JLabel label = new JLabel(imageIcon);
@@ -203,45 +192,37 @@ public class SwingPokemon {
         panel3.revalidate();
         panel3.repaint();
 
-        // Variável para controlar o estado da captura
-        final boolean[] capturado = {false};  // Controle de captura
-        final boolean[] fuga = {false};      // Controle de fuga
+        final boolean[] capturado = {false};  
+        final boolean[] fuga = {false};     
 
-        // Exibe o botão de captura e trata a tentativa de captura
         button6.setVisible(true);
         button6.addActionListener(e -> {
             if (capturado[0] || fuga[0]) {
-                // Se o Pokémon já foi capturado ou fugiu, não faz mais nada
                 return;
             }
 
             for (int i = 1; i <= 3; i++) {
                 int chance = (int) (Math.random() * 100);
                 if (chance < 30) {
-                    // Pop-up de sucesso
                     JOptionPane.showMessageDialog(frame, "Tentativa " + i + "/3: Você capturou " + pokemon.getNome() + "!");
-                    pokedex.add(pokemon);  // Adiciona à Pokédex
-                    lista.getPokemons().remove(pokemon);  // Remove o Pokémon da lista de selvagens
-                    capturado[0] = true;  // Define como capturado
+                    pokedex.add(pokemon);
+                    lista.getPokemons().remove(pokemon); 
+                    capturado[0] = true; 
                     break;
                 } else {
-                    // Pop-up de falha
                     JOptionPane.showMessageDialog(frame, "Tentativa " + i + "/3: Falha na captura!");
                 }
             }
 
-            // Remove a imagem do Pokémon após a captura ou falha
             panel3.remove(label);
             panel3.revalidate();
             panel3.repaint();
 
-            // Se não capturou o Pokémon, exibe mensagem de fuga
             if (!capturado[0]) {
                 JOptionPane.showMessageDialog(frame, pokemon.getNome() + " fugiu!");
-                fuga[0] = true;  // Define como fugido
+                fuga[0] = true;  
             }
 
-            // Após a captura ou falha, esconda o botão de captura novamente
             button6.setVisible(false);
         });
     }
