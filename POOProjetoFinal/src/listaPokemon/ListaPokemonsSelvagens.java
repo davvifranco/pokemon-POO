@@ -20,7 +20,6 @@ public class ListaPokemonsSelvagens {
         pokemons.add(new PokemonFogo("Ninetales", 40, "Drought", "Água", "Terra", "C:\\Users\\davvi\\OneDrive\\Documentos\\ProjetosPOO\\ImagensProjetos\\NINETALES.png"));
     }
 
-    // Adicionando o getter para acessar a lista
     public List<Pokemon> getPokemons() {
         return pokemons;
     }
